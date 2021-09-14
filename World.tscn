@@ -6,10 +6,16 @@
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2( -0.176781, 0 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -5, 0, 0, -65532, 0, 0, 65531, 0, 0, 4, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0 )
 
 [node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( -0.744049, -1.73613 )
+position = Vector2( 89.7385, -6.81279 )
+mass = 0.322449
+
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+visible = false
+current = true

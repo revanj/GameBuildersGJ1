@@ -1,18 +1,29 @@
 extends RigidBody2D
 
-var speed = 10
-var max_speed = 100
-func _physics_process(delta):
-	var xdir = 0
-	if Input.is_action_pressed("ui_left"):
-		xdir -= 1
+const UP = Vector2(0, -1)
+const ACCELERATION = 50
+const GRAVITY = 10
+const MAX_SPEED = 300
+const JUMP_HEIGHT = -500
+var velocity = Vector2()
+
+
+func friction():
+	velocity.x = lerp(velocity.x, 0.0, 0.1)
+	velocity.y = lerp(velocity.y, 0.0, 0.05)
+
+func move_right_left():
 	if Input.is_action_pressed("ui_right"):
-		xdir += 1
-		
-	add_central_force(Vector2(xdir * speed, 0))
-	
-	
-func _integrate_forces(state):
-	if state.linear_velocity.length()>max_speed:
-		state.linear_velocity=state.linear_velocity.normalized()*max_speed
-		
+		velocity.x = min(velocity.x+ACCELERATION, MAX_SPEED)
+	elif Input.is_action_pressed("ui_left"):
+		velocity.x = max(velocity.x-ACCELERATION, -MAX_SPEED)
+
+func gravity():
+	if (velocity.y < MAX_SPEED):
+		velocity.y += GRAVITY
+
+func _physics_process(delta):
+	gravity()
+	friction()
+	move_right_left()
+	self.linear_velocity = velocity;

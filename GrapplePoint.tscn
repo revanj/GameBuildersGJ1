@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="GrapplePoint" type="KinematicBody2D" groups=[
+"grapple_point",
+]]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")

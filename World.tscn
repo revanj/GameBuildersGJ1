@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 1.0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( -0.176781, 0 )
@@ -15,7 +21,18 @@ tile_data = PoolIntArray( -5, 0, 0, -65532, 0, 0, 65531, 0, 0, 4, 0, 0, 131067, 
 [node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 89.7385, -6.81279 )
 mass = 0.322449
+physics_material_override = SubResource( 1 )
+gravity_scale = 3.0
+linear_damp = 2.5
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
 visible = false
 current = true
+
+[node name="GrapplePoint" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1.52588e-05, -185.406 )
+
+[node name="PinJoint2D" parent="GrapplePoint" index="0"]
+node_b = NodePath("../../RigidBody2D")
+
+[editable path="GrapplePoint"]

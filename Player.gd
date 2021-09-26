@@ -19,7 +19,7 @@ func add_section(previous_node, pos):
 	rope.append(section)
 	section.mass = 0.01
 	section.weight = 5
-	section.gravity_scale = 0
+	section.gravity_scale = 1
 	section.angular_damp = 0
 	section.linear_damp = 0
 	for r in rope:
